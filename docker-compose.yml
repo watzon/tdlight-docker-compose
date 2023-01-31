@@ -35,7 +35,7 @@ services:
     user: root
     restart: always
     ports:
-      - 8080:80
+      - 3542:80
     networks:
       - tdlight
     volumes:
