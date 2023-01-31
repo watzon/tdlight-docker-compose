@@ -3,6 +3,7 @@ services:
   tdlight:
     image: tdlight/tdlightbotapi:latest
     restart: unless-stopped
+    user: root
     ports:
       - 8081:8081
       - 8082:8082
@@ -28,7 +29,7 @@ services:
       - TELEGRAM_FILE_EXPIRATION_TIME
       - TELEGRAM_LOGS
     volumes:
-      - tdlight_data:/var/lib/telegram-bot-api
+      - tdlight:/var/lib/telegram-bot-api
   nginx:
     image: nginx:alpine
     user: root
@@ -38,11 +39,11 @@ services:
     networks:
       - tdlight
     volumes:
-      - tdlight_data:/srv
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - tdlight:/srv
+      - ./nginx:/etc/nginx/conf.d/
 
 volumes:
-  tdlight_data:
+  tdlight:
 
 
 networks:
