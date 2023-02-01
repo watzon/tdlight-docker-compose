@@ -39,7 +39,7 @@ services:
     networks:
       - tdlight
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy:/etc/caddy/
       - tdlight:/tdlight
   # nginx:
   #   image: nginx:alpine
