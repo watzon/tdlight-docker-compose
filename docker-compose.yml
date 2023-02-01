@@ -30,17 +30,28 @@ services:
       - TELEGRAM_LOGS
     volumes:
       - tdlight:/var/lib/telegram-bot-api
-  nginx:
-    image: nginx:alpine
+  caddy:
+    image: caddy:2.6.2-alpine
+    restart: unless-stopped
     user: root
-    restart: always
     ports:
-      - 3542:80
+      - 8080:80
     networks:
       - tdlight
     volumes:
-      - tdlight:/srv
-      - ./nginx:/etc/nginx/conf.d/
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - tdlight:/tdlight
+  # nginx:
+  #   image: nginx:alpine
+  #   user: root
+  #   restart: always
+  #   ports:
+  #     - 3542:80
+  #   networks:
+  #     - tdlight
+  #   volumes:
+  #     - tdlight:/srv
+  #     - ./nginx:/etc/nginx/conf.d/
 
 volumes:
   tdlight:
